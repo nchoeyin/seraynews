@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'news',
+    'celery',
     'corsheaders',
     'django_crontab',
     'django.contrib.admin',
@@ -142,3 +143,11 @@ LOGGING = {
     },
 }
 
+# set the celery broker url 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+# set the celery result backend 
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# set the celery timezone 
+CELERY_TIMEZONE = 'UTC'
