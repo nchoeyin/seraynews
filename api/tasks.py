@@ -33,10 +33,31 @@ def my_periodic_task():
     # Navigate to the webpage you want to scrape
     driver.get(url)
     try:
+        news_list = []
         paragraph_elements = driver.find_elements(By.TAG_NAME, 'h4')
         # print(paragraph_elements.text)
         for h4 in paragraph_elements :
             print(h4.text)
+            news_list.append(h4.text)
+        #creating and writing to a pdf
+        from PyPDF2 import PdfWriter
+        # Create a PDF writer object
+        pdf_writer = PdfWriter()
+        # Create a blank page
+        page = pdf_writer.add_blank_page(width=72*8.5, height=72*11)
+        # List of items to write
+        # items = ["Item 1", "Item 2", "Item 3", "Item 4"]
+        # Starting position for the text
+        x = 100
+        y = 750
+        # Add items to the PDF
+        for item in news_list:
+            page.insert_text(x, y, item)
+            y -= 20  # Move down for the next item
+        # Save the PDF
+        with open("list_pypdf2.pdf", "wb") as f:
+            pdf_writer.write(f)
+
     except:
         print("the scraping failed!")
 
