@@ -1,36 +1,45 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [RouterLink, MatIconModule],
+  imports: [RouterLink, MatIconModule, ReactiveFormsModule],
   template: `
+  <form [formGroup]="signupForm">
+  <input type="text" formControlName="name">
+</form>
+
     <section class="flex justify-center h-screen w-screen bg-[#e3eff0] overflow-auto">
     <section class="flex flex-col w-7/12 h-full">
       <div class="min-h-screen flex items-center justify-center">
         <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
           <h2 class="text-2xl font-semibold mb-4">Sign up</h2>
-          <form>
+          <form [formGroup]="signupForm">
             <div class="mb-4">
-              <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-              <input type="text" id="name" name="name" class="mt-1 p-2 w-full border rounded-md">
+              <label class="block text-sm font-medium text-gray-700">First Name</label>
+              <input type="text" id="firstname" name="firstname" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="First Name" formControlName="firstname">
             </div>
             <div class="mb-4">
-              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-              <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
+              <label class="block text-sm font-medium text-gray-700">Last Name</label>
+              <input type="text" id="lastname" name="lastname" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Last Name" formControlName="lastname">
             </div>
             <div class="mb-4">
-              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-              <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md">
+              <label f class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="email" name="email" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Email" formControlName="email">
             </div>
             <div class="mb-4">
-              <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-              <input type="password" id="confirmPassword" name="confirmPassword" class="mt-1 p-2 w-full border rounded-md">
+              <label class="block text-sm font-medium text-gray-700">Password</label>
+              <input type="password" id="password" name="password" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Password" formControlName="password">
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+              <input type="password" id="confirmpassword" name="confirmpassword" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Confirm password" formControlName="confirmpassword">
             </div>
             <p class="text-center mb-4">By signing up, I accept the Terms & Privacy policies</p>
-            <button type="submit" class="bg-[#0f3438] w-full text-white px-4 py-2 rounded-md hover:bg-[#3f686c]">Signup Free</button>
+            <button type="submit" (click)="submitSignupData()" class="bg-[#0f3438] w-full text-white px-4 py-2 rounded-md hover:bg-[#3f686c]">Signup Free</button>
           </form>
           <p class="mt-4 text-center font-bold">OR</p>
           <!-- Google login button (you can customize this) -->
@@ -49,5 +58,18 @@ import { RouterLink } from '@angular/router';
   styleUrl: './signup.component.scss'
 })
 export class SignupComponent {
-
+  signupForm!: FormGroup;
+  constructor() {
+    this.signupForm = new FormGroup({
+      firstname: new FormControl(''),
+      lastname: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
+      confirmpassword: new FormControl(''),
+    });
+  }
+  submitSignupData(){
+    console.log(this.signupForm.value);
+    // You can save the data to the database here.
+  }
 }
