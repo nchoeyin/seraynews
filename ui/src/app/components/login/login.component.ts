@@ -4,27 +4,29 @@ import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, MatIconModule, FontAwesomeModule],
+  imports: [RouterLink, MatIconModule, FontAwesomeModule, ReactiveFormsModule],
   template: `
     <section class="flex justify-center h-screen w-screen bg-[#e3eff0] overflow-auto">
       <section class="flex flex-col w-7/12 h-full">
         <div class="min-h-screen flex items-center justify-center">
           <div class="bg-white p-8 rounded-lg shadow-md w-96">
             <h3 class="text-2xl font-semibold mb-4 text-center">Log in to your account</h3>
-            <form>
+            <form  [formGroup]="loginForm">
               <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" name="email" class="mt-1 p-2 border rounded w-full" />
+                <input type="email" id="email" name="email" class="mt-1 p-2 border rounded w-full" formControlName="email" />
               </div>
               <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" name="password" class="mt-1 p-2 border rounded w-full" />
+                <input type="password" id="password" name="password" class="mt-1 p-2 border rounded w-full" formControlName="password"/>
               </div>
-              <button type="submit" class="bg-[#0f3438] w-full mb-2 text-white px-4 py-2 rounded hover:bg-[#3f686c]">Sign In</button>
+              <button type="submit" (click)="submitLoginData()" class="bg-[#0f3438] w-full mb-2 text-white px-4 py-2 rounded hover:bg-[#3f686c]">Sign In</button>
             </form>
             <p class="text-right">Forgot Password?</p>
             <p class="mt-4 text-center font-bold">OR</p>
@@ -47,4 +49,15 @@ export class LoginComponent {
   // Declare the icon
   faCoffee = faCoffee;
   faGoogle = faGoogle;
+  loginForm!: FormGroup;
+  constructor() {
+    this.loginForm = new FormGroup({
+      email: new FormControl(''),
+      password: new FormControl(''),
+    });
+  }
+  submitLoginData(){
+    console.log(this.loginForm.value);
+    // You can save the data to the database here.
+  }
 }
