@@ -8,34 +8,30 @@ import { FormGroup, FormControl } from '@angular/forms';
   standalone: true,
   imports: [RouterLink, MatIconModule, ReactiveFormsModule],
   template: `
-  <form [formGroup]="signupForm">
-  <input type="text" formControlName="name">
-</form>
-
-    <section class="flex justify-center h-screen w-screen bg-[#e3eff0] overflow-auto">
+    <section class="flex justify-center h-screen w-screen bg-[#e3eff0]">
     <section class="flex flex-col w-7/12 h-full">
       <div class="min-h-screen flex items-center justify-center">
         <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
           <h2 class="text-2xl font-semibold mb-4">Sign up</h2>
           <form [formGroup]="signupForm">
             <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">First Name</label>
+              <!-- <label class="block text-sm font-medium text-gray-700">First Name</label> -->
               <input type="text" id="firstname" name="firstname" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="First Name" formControlName="firstname">
             </div>
             <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">Last Name</label>
+              <!-- <label class="block text-sm font-medium text-gray-700">Last Name</label> -->
               <input type="text" id="lastname" name="lastname" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Last Name" formControlName="lastname">
             </div>
             <div class="mb-4">
-              <label f class="block text-sm font-medium text-gray-700">Email</label>
+              <!-- <label f class="block text-sm font-medium text-gray-700">Email</label> -->
               <input type="email" id="email" name="email" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Email" formControlName="email">
             </div>
             <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">Password</label>
+              <!-- <label class="block text-sm font-medium text-gray-700">Password</label> -->
               <input type="password" id="password" name="password" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Password" formControlName="password">
             </div>
             <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+              <!-- <label class="block text-sm font-medium text-gray-700">Confirm Password</label> -->
               <input type="password" id="confirmpassword" name="confirmpassword" class="form-control mt-1 p-2 w-full border rounded-md" placeholder="Confirm password" formControlName="confirmpassword">
             </div>
             <p class="text-center mb-4">By signing up, I accept the Terms & Privacy policies</p>
